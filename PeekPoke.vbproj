@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+<Target Name="ReadXmlPeekValue">
+    <!-- you do not need a namespace for this example, but I left it in for future reference -->
+    <XmlPeek Namespaces="&lt;Namespace Prefix='peanutNamespace' Uri='http://schemas.microsoft.com/developer/msbuild/2003'/&gt;"
+         XmlInputPath=".\Parameters.xml" 
+         Query="/parameters/setParameter[@name='MyConnectionStringParameter']/@value">
+        <Output TaskParameter="Result" ItemName="Peeked" />
+    </XmlPeek>
+
+    <Message Text="@(Peeked)"/>
+
+    <XmlPeek Namespaces="&lt;Namespace Prefix='peanutNamespace' Uri='http://schemas.microsoft.com/developer/msbuild/2003'/&gt;"
+         XmlInputPath=".\Parameters.xml" 
+         Query="/parameters/setParameter[@name='MyConnectionStringParameter']/@value">
+        <Output TaskParameter="Result" PropertyName="PeekedSingle" />
+    </XmlPeek>
+
+    <Message Text="$(PeekedSingle)"/>
+
+</Target>
+
+</Project>
